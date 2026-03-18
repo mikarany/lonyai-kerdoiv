@@ -1257,29 +1257,39 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-    const data = new FormData(form);
-    const result = {};
-    data.forEach((v, k) => { result[k] = v; });
+    // Manuálisan gyűjtjük az értékeket hogy biztosan a jó mezők jöjjenek
+    function getVal(name) {
+      const el = form.querySelector(`[name="${name}"]:checked`) ||
+                 form.querySelector(`[name="${name}"]`);
+      return el ? el.value : '';
+    }
+    function getHidden(id) {
+      const el = document.getElementById(id);
+      return el ? el.value : '';
+    }
+    function getCheckboxes(name) {
+      return [...form.querySelectorAll(`[name="${name}"]:checked`)].map(el => el.value).join(', ');
+    }
 
     const payload = {
-      'Tagság hossza':              result.tenure ?? '',
-      'Atmoszféra (1-10)':          result.atm ?? '',
-      'Mi tetszik a legjobban':     result.best ?? '',
-      'Kiszolgálás (csillag)':      result.service ?? '',
-      'Ételkínálat':                result.food ?? '',
-      'Mit változtatna':            result.improve ?? '',
-      'Mi hiányzik az itallapról':  result.drinks_missing ?? '',
-      'Mikor látogat':              result.timing ?? '',
-      'Látogatás (elmúlt 2 hónap)': result.visits ?? '',
-      'Értesülés eseményekről':     result.comms ?? '',
-      'Napszak preferencia':        result.eventtime ?? '',
-      'Elmúlt 3 hónap eseményei':   result.events ?? '',
-      'Kedvenc esemény':            result.fav_events ?? '',
-      'Esemény rangsor':            result.ranking ?? '',
-      'Közösség érzete (1-10)':     result.community ?? '',
-      'Látogatás megéri?':          result.usage ?? '',
-      'Tagság értéke (1-10)':       result.value ?? '',
-      'Ajánlás (csillag)':          result.recommend ?? '',
+      'Tagság hossza':              getVal('tenure'),
+      'Atmoszféra (1-10)':          getHidden('atm-slider') ? form.querySelector('#atm-slider')?.value : '',
+      'Mi tetszik a legjobban':     form.querySelector('[name="best"]')?.value ?? '',
+      'Kiszolgálás (csillag)':      getHidden('service-val-hidden'),
+      'Ételkínálat':                getVal('food'),
+      'Mit változtatna':            form.querySelector('[name="improve"]')?.value ?? '',
+      'Mi hiányzik az itallapról':  form.querySelector('[name="drinks_missing"]')?.value ?? '',
+      'Mikor látogat':              getCheckboxes('timing'),
+      'Látogatás (elmúlt 2 hónap)': getVal('visits'),
+      'Értesülés eseményekről':     getVal('comms'),
+      'Napszak preferencia':        getCheckboxes('eventtime'),
+      'Elmúlt 3 hónap eseményei':   getHidden('events-val-hidden'),
+      'Kedvenc esemény':            form.querySelector('[name="fav_events"]')?.value ?? '',
+      'Esemény rangsor':            getHidden('ranking-value'),
+      'Közösség érzete (1-10)':     getVal('community'),
+      'Látogatás megéri?':          getVal('usage'),
+      'Tagság értéke (1-10)':       form.querySelector('#value-slider')?.value ?? '',
+      'Ajánlás (csillag)':          getHidden('recommend-val-hidden'),
     };
 
     fetch('https://script.google.com/macros/s/AKfycbzYat7Y0qXMwQVUun3IXfwV-nz7kxu4AHuDs5T6MBvjihzKWSX6ryes5wM1VP7axMtFPQ/exec', {
