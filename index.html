@@ -1253,7 +1253,7 @@
     });
   });
 
-  // Form submit — Formspree
+  // Form submit — Google Apps Script → Google Sheets
   form.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -1261,41 +1261,33 @@
     const result = {};
     data.forEach((v, k) => { result[k] = v; });
 
-    const fieldLabels = {
-      tenure:         'Tagság hossza',
-      atm:            'Atmoszféra (1-10)',
-      best:           'Mi tetszik a legjobban',
-      service:        'Kiszolgálás (1-5 csillag)',
-      food:           'Ételkínálat',
-      improve:        'Mit változtatna',
-      drinks_missing: 'Mi hiányzik az itallapról',
-      timing:         'Mikor látogat',
-      visits:         'Látogatás (elmúlt 2 hónap)',
-      comms:          'Értesülés eseményekről',
-      eventtime:      'Napszak preferencia',
-      events:         'Elmúlt 3 hónap eseményei (1-5 csillag)',
-      fav_events:     'Kedvenc esemény',
-      ranking:        'Esemény rangsor',
-      community:      'Közösség érzete (1-10)',
-      usage:          'Látogatás megéri?',
-      value:          'Tagság értéke (1-10)',
-      recommend:      'Ajánlás (1-5 csillag)',
+    const payload = {
+      'Tagság hossza':              result.tenure ?? '',
+      'Atmoszféra (1-10)':          result.atm ?? '',
+      'Mi tetszik a legjobban':     result.best ?? '',
+      'Kiszolgálás (csillag)':      result.service ?? '',
+      'Ételkínálat':                result.food ?? '',
+      'Mit változtatna':            result.improve ?? '',
+      'Mi hiányzik az itallapról':  result.drinks_missing ?? '',
+      'Mikor látogat':              result.timing ?? '',
+      'Látogatás (elmúlt 2 hónap)': result.visits ?? '',
+      'Értesülés eseményekről':     result.comms ?? '',
+      'Napszak preferencia':        result.eventtime ?? '',
+      'Elmúlt 3 hónap eseményei':   result.events ?? '',
+      'Kedvenc esemény':            result.fav_events ?? '',
+      'Esemény rangsor':            result.ranking ?? '',
+      'Közösség érzete (1-10)':     result.community ?? '',
+      'Látogatás megéri?':          result.usage ?? '',
+      'Tagság értéke (1-10)':       result.value ?? '',
+      'Ajánlás (csillag)':          result.recommend ?? '',
     };
 
-    const payload = {};
-    for (const [field, label] of Object.entries(fieldLabels)) {
-      payload[label] = result[field] ?? '';
-    }
-
-    fetch('https://formspree.io/f/xyknlzpb', {
+    fetch('https://script.google.com/macros/s/AKfycbzYat7Y0qXMwQVUun3IXfwV-nz7kxu4AHuDs5T6MBvjihzKWSX6ryes5wM1VP7axMtFPQ/exec', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-    })
-    .then(res => {
-      if (!res.ok) console.error('Formspree hiba:', res.status);
-    })
-    .catch(err => console.error('Küldési hiba:', err));
+    }).catch(err => console.error('Küldési hiba:', err));
 
     form.style.display = 'none';
     document.getElementById('success').classList.add('visible');
