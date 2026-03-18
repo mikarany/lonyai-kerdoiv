@@ -1,81 +1,1306 @@
-LK
-TAGSÁGI KÉRDŐÍV
-Lónyai 1867 Klub
 
-Véleménye segíti, hogy a klub továbbra is az Ön igényeit szolgálja. A kérdőív kitöltése kb. 3 percet vesz igénybe.
-NÉVTELEN ÉS BIZALMAS
-01 — TAGSÁG
-Mióta tagja a klubnak?
-Kevesebb
-mint 1 éve 1–3 éve Több mint
-3 éve
-02 — HELYSZÍN
-A klub atmoszférája és belső tere
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lónyai 1867 Klub – Tagsági Kérdőív</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #e8c97a;
+    --dark: #0e0d0b;
+    --surface: #161410;
+    --surface2: #1e1c18;
+    --border: rgba(201,168,76,0.18);
+    --text: #e8e2d6;
+    --text-muted: #8a8070;
+    --radius: 2px;
+  }
 
-03 — SZEMÉLYES VÉLEMÉNY
-Mi az, amit a legjobban értékel a klubban?
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-04 — SZEMÉLYZET
-Kiszolgálás színvonala
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 60px 20px;
+    background-image: 
+      radial-gradient(ellipse at 20% 0%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  }
 
-05 — KÍNÁLAT
-Ételkínálat minősége és választéka
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
 
-06 — FEJLESZTÉS
-Ha egyetlen dolgon változtatnánk, mitől érné meg jobban a tagság?
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease both;
+  }
 
-07 — KÍNÁLAT
-Mi hiányzik az itallapról?
+  .club-monogram {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 2px;
+    position: relative;
+  }
 
-08 — LÁTOGATÁS
-Mikor látogat legszívesebben a klubba?
-Több is választható.
-09 — LÁTOGATÁS
-Hányszor látogatta a klubot az elmúlt 2 hónapban?
+  .club-monogram::before, .club-monogram::after {
+    content: '';
+    position: absolute;
+    width: 8px; height: 8px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .club-monogram::before { top: -4px; left: -4px; border-width: 1px 0 0 1px; }
+  .club-monogram::after { bottom: -4px; right: -4px; border-width: 0 1px 1px 0; }
 
-10 — KOMMUNIKÁCIÓ
-Mennyire értesül időben az eseményekről?
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
 
-11 — IDŐBEOSZTÁS
-Melyik napszakban venne részt eseményeken a legszívesebben?
-Több is választható.
-12 — ESEMÉNYEK
-Az elmúlt 3 hónap eseményei
-Hogyan értékelné?
+  .subtitle {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
 
-13 — KEDVENCEK
-Melyik eddigi esemény(ek) voltak a kedvencei, és miért?
+  .intro {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto;
+  }
 
-14 — JÖVŐBELI ESEMÉNYEK
-Rendezze sorrendbe az eseménytípusokat
-Húzza az Önnek legjobban tetsző eseményt a lista elejére (1 = leginkább vonzó).
-⠿
-1
-Szakértői előadás
-⠿
-2
-Bor kóstoló
-⠿
-3
-Whiskey kóstoló
-⠿
-4
-Aktuális társadalmi kérdések — kerekasztal
-⠿
-5
-Nyílt társalgó est
-Húzza és ejtse a kívánt sorrendbe
-15 — KÖZÖSSÉG
-Mennyire érzi, hogy a klub valódi közösséget alkot?
+  .anon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: 1px solid rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.05);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .anon-badge::before {
+    content: '◆';
+    font-size: 8px;
+  }
+  .anon-badge::after {
+    content: '◆';
+    font-size: 8px;
+  }
 
-16 — ÉRTÉKELÉS
-Úgy érzi, eleget látogat a klubba, hogy megérje a tagság?
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto;
+    opacity: 0.5;
+  }
 
-17 — ÖSSZESÍTETT VÉLEMÉNY
-Összességében — a tagság megéri az árát
+  /* Sections */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section, .scale-item {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .section.visible, .scale-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-18 — ZÁRÓ KÉRDÉS
-Ajánlaná a Lónyai 1867 Klubot ismerőseinek?
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
 
-VISSZAJELZÉS ELKÜLDÉSE
-A válaszok névtelenek és kizárólag a klub fejlesztésére szolgálnak.
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Star Rating */
+  .rating-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .rating-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .rating-label {
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .stars {
+    display: flex;
+    gap: 6px;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .stars input {
+    display: none;
+  }
+
+  .stars label {
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--border);
+    transition: color 0.15s;
+    line-height: 1;
+    display: block;
+  }
+
+  .stars label::before { content: '◆'; }
+
+  .stars input:checked ~ label,
+  .stars label:hover,
+  .stars label:hover ~ label {
+    color: var(--gold);
+  }
+
+  /* Scale Rating */
+  .scale-group {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .scale-item {}
+
+  .scale-question {
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .scale-options {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .scale-options label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .scale-options label:last-child { border-right: none; }
+
+  .scale-options input { display: none; }
+
+  .scale-num {
+    font-size: 15px;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    line-height: 1;
+  }
+
+  .scale-options input:checked + .scale-num,
+  .scale-options label:has(input:checked) .scale-num {
+    color: var(--gold);
+  }
+
+  .scale-options label:has(input:checked) {
+    background: rgba(201,168,76,0.07);
+  }
+
+  .scale-options label:hover {
+    background: rgba(201,168,76,0.04);
+  }
+
+  .scale-options label:hover .scale-num {
+    color: var(--gold-light);
+  }
+
+  /* Ranking */
+  .rank-intro {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .rank-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rank-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    cursor: grab;
+    transition: border-color 0.2s, transform 0.15s;
+    user-select: none;
+  }
+
+  .rank-item:active { cursor: grabbing; transform: scale(1.02); }
+  .rank-item.dragging { border-color: var(--gold); opacity: 0.8; }
+  .rank-item.drag-over { border-color: var(--gold-light); background: rgba(201,168,76,0.06); }
+
+  .rank-handle {
+    color: var(--text-muted);
+    font-size: 14px;
+    letter-spacing: -2px;
+    line-height: 1;
+  }
+
+  .rank-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--gold);
+    width: 24px;
+    text-align: center;
+    transition: color 0.3s;
+    line-height: 1;
+  }
+
+  .rank-text {
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .rank-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Text area */
+  .text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .text-item label {
+    display: block;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 14px 16px;
+    resize: vertical;
+    min-height: 90px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+    border-radius: var(--radius);
+  }
+
+  textarea::placeholder { color: var(--text-muted); }
+  textarea:focus { border-color: rgba(201,168,76,0.5); }
+
+  /* Membership duration */
+  .radio-group {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+
+  .radio-group label {
+    flex: 1;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 10px;
+    border: 1px solid var(--border);
+    margin-right: -1px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .radio-group input { display: none; }
+  .radio-group label:has(input:checked) {
+    background: rgba(201,168,76,0.08);
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.4);
+    z-index: 1;
+  }
+  .radio-group label:hover { color: var(--text); }
+
+  /* Submit */
+  .submit-section {
+    text-align: center;
+    padding-top: 16px;
+  }
+
+  .submit-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 16px 48px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 0;
+  }
+
+  .submit-btn:hover::before { transform: translateX(0); }
+  .submit-btn:hover { color: var(--dark); }
+  .submit-btn span { position: relative; z-index: 1; }
+
+  .privacy-note {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* Success */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 20px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .success-screen.visible { display: block; }
+
+  .success-icon {
+    font-size: 32px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .success-screen h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+
+  .success-screen p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Slider ── */
+  .slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .slider-label-left, .slider-label-right {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--text-muted);
+    min-width: 16px;
+    text-align: center;
+  }
+  .fancy-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 1px;
+    background: var(--border);
+    outline: none;
+    cursor: pointer;
+    position: relative;
+  }
+  .fancy-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    background: var(--gold);
+    border-radius: 0;
+    border: none;
+    cursor: pointer;
+    transform: rotate(45deg);
+    transition: transform 0.2s, background 0.2s;
+    position: relative;
+    margin-top: -7px;
+  }
+  .fancy-slider::-webkit-slider-runnable-track {
+    height: 1px;
+    background: var(--border);
+  }
+  .fancy-slider::-webkit-slider-thumb:hover { background: var(--gold-light); transform: rotate(45deg) scale(1.2); }
+  .fancy-slider::-moz-range-thumb {
+    width: 16px; height: 16px;
+    background: var(--gold);
+    border-radius: 0; border: none; cursor: pointer;
+    transform: rotate(45deg);
+  }
+  .slider-value-display {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+    margin-top: 14px;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .slider-half {
+    font-size: 0.38em;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.15em;
+    letter-spacing: 0;
+    color: var(--gold-light);
+  }
+  .slider-dot {
+    font-size: 1.6em;
+    line-height: 0;
+    vertical-align: -0.18em;
+    margin-right: 0.02em;
+  }
+
+  /* ── Card row ── */
+  .card-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .card-opt {
+    flex: 1;
+    min-width: 120px;
+    cursor: pointer;
+  }
+  .card-opt input { display: none; }
+  .card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 12px;
+    height: 90px;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    background: var(--surface2);
+  }
+  .card-icon { font-size: 11px; color: var(--text-muted); transition: color 0.2s; }
+  .card-star {
+    color: var(--gold);
+    display: block;
+    flex-shrink: 0;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .card-text { font-size: 12px; color: var(--text-muted); text-align: center; letter-spacing: 0.08em; line-height: 1.4; transition: color 0.2s; }
+  .card-opt:has(input:checked) .card-inner { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+  .card-opt:has(input:checked) .card-star { color: var(--gold-light); transform: scale(1.1); }
+  .card-opt:has(input:checked) .card-text { color: var(--gold); }
+  .card-opt:hover .card-inner { border-color: rgba(201,168,76,0.35); }
+  .card-opt:hover .card-star { color: var(--gold-light); }
+
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-top: -16px;
+    margin-bottom: 20px;
+  }
+
+  /* ── Star rating (half-star, SVG-based) ── */
+  .star-rating-wrap {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+  }
+  .star-svg-btn {
+    cursor: pointer;
+    position: relative;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+  .star-svg-btn svg {
+    width: 38px;
+    height: 38px;
+    display: block;
+  }
+  .star-val-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-left: 14px;
+    min-width: 44px;
+    line-height: 1;
+  }
+  .star-val-display .star-val-half {
+    font-size: 0.45em;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.1em;
+    color: var(--gold-light);
+  }
+
+  /* Star rating */
+  .recommend-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .recommend-scale {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+  .recommend-scale label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 4px;
+    cursor: pointer;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .recommend-scale label:last-child { border-right: none; }
+  .recommend-scale input { display: none; }
+  .rec-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    line-height: 1;
+  }
+  .recommend-scale label:has(input:checked) { background: rgba(201,168,76,0.08); }
+  .recommend-scale label:has(input:checked) .rec-num { color: var(--gold); }
+  .recommend-scale label:hover .rec-num { color: var(--text); }
+  .recommend-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2px;
+  }
+  .recommend-labels span { font-size: 10px; color: var(--text-muted); letter-spacing: 0.08em; }
+
+  /* ── Checkbox row (multi-select) ── */
+  .checkbox-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .cb-opt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 16px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .cb-opt input { display: none; }
+  .cb-box {
+    width: 12px; height: 12px;
+    border: 1px solid var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 9px;
+    color: transparent;
+  }
+  .cb-opt:has(input:checked) { border-color: rgba(201,168,76,0.5); background: rgba(201,168,76,0.07); color: var(--gold-light); }
+  .cb-opt:has(input:checked) .cb-box { border-color: var(--gold); background: var(--gold); color: var(--dark); }
+  .cb-opt:hover { color: var(--text); }
+
+  @media (max-width: 480px) {
+    .rating-item { flex-direction: column; align-items: flex-start; }
+    .scale-options label { padding: 10px 1px; }
+    .scale-num { font-size: 13px; }
+    .radio-group label { min-width: 100%; margin-right: 0; margin-bottom: -1px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="club-monogram">LK</div>
+    <p class="subtitle">Tagsági Kérdőív</p>
+    <h1>Lónyai 1867 Klub</h1>
+    <div class="divider"></div>
+    <p class="intro">Véleménye segíti, hogy a klub továbbra is az Ön igényeit szolgálja.<br>A kérdőív kitöltése kb. 3 percet vesz igénybe.</p>
+    <div><span class="anon-badge">Névtelen és bizalmas</span></div>
+  </div>
+
+  <form id="form">
+
+    <!-- 01 Tagság -->
+    <div class="section">
+      <p class="section-label">01 — Tagság</p>
+      <h2 class="section-title">Mióta tagja a klubnak?</h2>
+      <div class="radio-group">
+        <label><input type="radio" name="tenure" value="<1"> Kevesebb<br>mint 1 éve</label>
+        <label><input type="radio" name="tenure" value="1-3"> 1–3 éve</label>
+        <label><input type="radio" name="tenure" value="3+"> Több mint<br>3 éve</label>
+      </div>
+    </div>
+
+    <!-- 02 Atmoszféra — csúszka -->
+    <div class="section">
+      <p class="section-label">02 — Helyszín</p>
+      <h2 class="section-title">A klub atmoszférája és belső tere</h2>
+      <div id="q-atm"></div>
+    </div>
+
+    <!-- 03 Textarea: mi tetszik -->
+    <div class="section">
+      <p class="section-label">03 — Személyes vélemény</p>
+      <h2 class="section-title">Mi az, amit a legjobban értékel a klubban?</h2>
+      <div class="text-group">
+        <div class="text-item">
+          <textarea name="best" placeholder="Pl. a nyugodt légkör, az emberi kapcsolatok..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 Kiszolgálás — számsáv -->
+    <div class="section">
+      <p class="section-label">04 — Személyzet</p>
+      <h2 class="section-title">Kiszolgálás színvonala</h2>
+      <div id="q-service"></div>
+    </div>
+
+    <!-- 05 Ételkínálat — kártyás -->
+    <div class="section">
+      <p class="section-label">05 — Kínálat</p>
+      <h2 class="section-title">Ételkínálat minősége és választéka</h2>
+      <div id="q-food"></div>
+    </div>
+
+    <!-- 06 Textarea: mit változtatna -->
+    <div class="section">
+      <p class="section-label">06 — Fejlesztés</p>
+      <h2 class="section-title">Ha egyetlen dolgon változtatnánk, mitől érné meg jobban a tagság?</h2>
+      <div class="text-group">
+        <div class="text-item">
+          <textarea name="improve" placeholder="Pl. több alkalom hétközben, változatosabb étlap..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 Italkínálat — textarea -->
+    <div class="section">
+      <p class="section-label">07 — Kínálat</p>
+      <h2 class="section-title">Mi hiányzik az itallapról?</h2>
+      <div class="text-group">
+        <div class="text-item">
+          <textarea name="drinks_missing" placeholder="Pl. nincs természetes bor, kevés a whisky választék..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 Checkbox: mikor látogat -->
+    <div class="section">
+      <p class="section-label">08 — Látogatás</p>
+      <h2 class="section-title">Mikor látogat legszívesebben a klubba?</h2>
+      <p class="rank-intro" style="margin-bottom:16px;">Több is választható.</p>
+      <div class="checkbox-row" id="timing-checks"></div>
+    </div>
+
+    <!-- 09 Hányszor látogatott — kártyás -->
+    <div class="section">
+      <p class="section-label">09 — Látogatás</p>
+      <h2 class="section-title">Hányszor látogatta a klubot az elmúlt 2 hónapban?</h2>
+      <div id="q-visits"></div>
+    </div>
+
+    <!-- 10 Kommunikáció — kártyás -->
+    <div class="section">
+      <p class="section-label">10 — Kommunikáció</p>
+      <h2 class="section-title">Mennyire értesül időben az eseményekről?</h2>
+      <div id="q-comms"></div>
+    </div>
+
+    <!-- 11 Checkbox: napszak -->
+    <div class="section">
+      <p class="section-label">11 — Időbeosztás</p>
+      <h2 class="section-title">Melyik napszakban venne részt eseményeken a legszívesebben?</h2>
+      <p class="rank-intro" style="margin-bottom:16px;">Több is választható.</p>
+      <div class="checkbox-row" id="eventtime-checks"></div>
+    </div>
+
+    <!-- 12 Események — csillagos értékelés -->
+    <div class="section">
+      <p class="section-label">12 — Események</p>
+      <h2 class="section-title">Az elmúlt 3 hónap eseményei</h2>
+      <p class="section-subtitle">Hogyan értékelné?</p>
+      <div id="q-events"></div>
+    </div>
+
+    <!-- 13 Textarea: kedvenc esemény -->
+    <div class="section">
+      <p class="section-label">13 — Kedvencek</p>
+      <h2 class="section-title">Melyik eddigi esemény(ek) voltak a kedvencei, és miért?</h2>
+      <div class="text-group">
+        <div class="text-item">
+          <textarea name="fav_events" placeholder="Pl. a tavalyi whisky-kóstoló, a márciusi előadás..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 Esemény rangsor -->
+    <div class="section">
+      <p class="section-label">14 — Jövőbeli események</p>
+      <h2 class="section-title">Rendezze sorrendbe az eseménytípusokat</h2>
+      <p class="rank-intro">Húzza az Önnek legjobban tetsző eseményt a lista elejére (1 = leginkább vonzó).</p>
+      <div class="rank-list" id="rank-list">
+        <div class="rank-item" draggable="true" data-value="talk">
+          <span class="rank-handle">⠿</span>
+          <span class="rank-number">1</span>
+          <span class="rank-text">Szakértői előadás</span>
+        </div>
+        <div class="rank-item" draggable="true" data-value="wine">
+          <span class="rank-handle">⠿</span>
+          <span class="rank-number">2</span>
+          <span class="rank-text">Bor kóstoló</span>
+        </div>
+        <div class="rank-item" draggable="true" data-value="whiskey">
+          <span class="rank-handle">⠿</span>
+          <span class="rank-number">3</span>
+          <span class="rank-text">Whiskey kóstoló</span>
+        </div>
+        <div class="rank-item" draggable="true" data-value="politics">
+          <span class="rank-handle">⠿</span>
+          <span class="rank-number">4</span>
+          <span class="rank-text">Aktuális társadalmi kérdések — kerekasztal</span>
+        </div>
+        <div class="rank-item" draggable="true" data-value="social">
+          <span class="rank-handle">⠿</span>
+          <span class="rank-number">5</span>
+          <span class="rank-text">Nyílt társalgó est</span>
+        </div>
+      </div>
+      <p class="rank-hint">Húzza és ejtse a kívánt sorrendbe</p>
+      <input type="hidden" name="ranking" id="ranking-value">
+    </div>
+
+    <!-- 15 Közösség — számsáv -->
+    <div class="section">
+      <p class="section-label">15 — Közösség</p>
+      <h2 class="section-title">Mennyire érzi, hogy a klub valódi közösséget alkot?</h2>
+      <div id="q-community"></div>
+    </div>
+
+    <!-- 16 Látogatás megéri? — kártyás -->
+    <div class="section">
+      <p class="section-label">16 — Értékelés</p>
+      <h2 class="section-title">Úgy érzi, eleget látogat a klubba, hogy megérje a tagság?</h2>
+      <div id="q-usage"></div>
+    </div>
+
+    <!-- 17 Tagság értéke — csúszka -->
+    <div class="section">
+      <p class="section-label">17 — Összesített vélemény</p>
+      <h2 class="section-title">Összességében — a tagság megéri az árát</h2>
+      <div id="q-value"></div>
+    </div>
+
+    <!-- 18 Ajánlás -->
+    <div class="section">
+      <p class="section-label">18 — Záró kérdés</p>
+      <h2 class="section-title">Ajánlaná a Lónyai 1867 Klubot ismerőseinek?</h2>
+      <div id="q-recommend"></div>
+    </div>
+
+    <div class="submit-section">
+      <button type="submit" class="submit-btn"><span>Visszajelzés elküldése</span></button>
+      <p class="privacy-note">A válaszok névtelenek és kizárólag a klub fejlesztésére szolgálnak.</p>
+    </div>
+
+  </form>
+
+  <div class="success-screen" id="success">
+    <div class="success-icon">◆</div>
+    <h2>Köszönjük visszajelzését</h2>
+    <div class="divider"></div>
+    <p>Véleménye értékes számunkra.<br>A Lónyai 1867 Klub csapata</p>
+  </div>
+
+</div>
+
+<script>
+  // ── Kérdések — minden saját div-be kerül ────────────────────────────────
+
+  function numRow(name) {
+    return `<div class="scale-options">${Array.from({length:10},(_,i)=>`<label><input type="radio" name="${name}" value="${i+1}"><span class="scale-num">${i+1}</span></label>`).join('')}</div>`;
+  }
+  function slider(name, id) {
+    return `<div class="slider-wrap"><span class="slider-label-left">1</span><input type="range" name="${name}" min="1" max="10" step="0.5" value="5.5" class="fancy-slider" id="${id}-slider" oninput="updateSlider(this)"><span class="slider-label-right">10</span></div><div class="slider-value-display" id="${id}-val"></div>`;
+  }
+
+  // Csillag SVG-k — egyre több ággal (4→5→6→7→8)
+  function starSVG(points, size) {
+    const cx = 12, cy = 12, outerR = 10, innerR = outerR * 0.42;
+    const pts = [];
+    for (let i = 0; i < points * 2; i++) {
+      const r = i % 2 === 0 ? outerR : innerR;
+      const angle = (i * Math.PI) / points - Math.PI / 2;
+      pts.push(`${(cx + r * Math.cos(angle)).toFixed(2)},${(cy + r * Math.sin(angle)).toFixed(2)}`);
+    }
+    return `<svg viewBox="0 0 24 24" class="card-star" style="width:${size}px;height:${size}px"><polygon points="${pts.join(' ')}" fill="currentColor"/></svg>`;
+  }
+  const starIcons = [starSVG(4,13), starSVG(5,16), starSVG(6,19), starSVG(7,22), starSVG(8,25)];
+
+  function cards(name, opts) {
+    return `<div class="card-row">${opts.map((o,i)=>`<label class="card-opt"><input type="radio" name="${name}" value="${o.v}"><div class="card-inner">${starIcons[i]}<span class="card-text">${o.label}</span></div></label>`).join('')}</div>`;
+  }
+
+  function starRating(name) {
+    // Built and managed entirely by JS after inject
+    return `<div class="star-rating-wrap" id="${name}-stars"></div><input type="hidden" name="${name}" id="${name}-val-hidden">`;
+  }
+
+  function buildStars(name) {
+    const wrap = document.getElementById(`${name}-stars`);
+    if (!wrap) return;
+    const display = document.createElement('div');
+    display.className = 'star-val-display';
+    display.id = `${name}-display`;
+    display.textContent = '—';
+
+    let currentVal = 0;
+
+    // Star SVG path
+    function starPath() {
+      const pts = [];
+      for (let i = 0; i < 10; i++) {
+        const r = i % 2 === 0 ? 9 : 3.8;
+        const a = (i * Math.PI) / 5 - Math.PI / 2;
+        pts.push(`${(10 + r * Math.cos(a)).toFixed(2)},${(10 + r * Math.sin(a)).toFixed(2)}`);
+      }
+      return pts.join(' ');
+    }
+
+    const path = starPath();
+
+    for (let s = 1; s <= 5; s++) {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 20 20');
+      svg.classList.add('star-svg-btn');
+      svg.dataset.star = s;
+
+      // Gradient def for half-fill
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      const grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+      grad.id = `${name}-grad-${s}`;
+      grad.setAttribute('x1','0%'); grad.setAttribute('x2','100%');
+      const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+      stop1.setAttribute('offset','50%'); stop1.setAttribute('stop-color','var(--border)');
+      const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+      stop2.setAttribute('offset','50%'); stop2.setAttribute('stop-color','var(--border)');
+      grad.appendChild(stop1); grad.appendChild(stop2);
+      defs.appendChild(grad); svg.appendChild(defs);
+
+      const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      poly.setAttribute('points', path);
+      poly.setAttribute('fill', `url(#${name}-grad-${s})`);
+      svg.appendChild(poly);
+
+      svg.addEventListener('mousemove', (e) => {
+        const rect = svg.getBoundingClientRect();
+        const half = (e.clientX - rect.left) < rect.width / 2;
+        const hoverVal = half ? s - 0.5 : s;
+        renderStars(name, hoverVal, true);
+      });
+      svg.addEventListener('mouseleave', () => renderStars(name, currentVal, false));
+      svg.addEventListener('click', (e) => {
+        const rect = svg.getBoundingClientRect();
+        const half = (e.clientX - rect.left) < rect.width / 2;
+        currentVal = half ? s - 0.5 : s;
+        document.getElementById(`${name}-val-hidden`).value = currentVal;
+        renderStars(name, currentVal, false);
+        updateDisplay(name, currentVal);
+      });
+
+      wrap.appendChild(svg);
+    }
+    wrap.appendChild(display);
+  }
+
+  function renderStars(name, val, hover) {
+    for (let s = 1; s <= 5; s++) {
+      const svg = document.querySelector(`#${name}-stars [data-star="${s}"]`);
+      if (!svg) continue;
+      const grad = document.getElementById(`${name}-grad-${s}`);
+      const stop1 = grad.children[0];
+      const stop2 = grad.children[1];
+      const gold = 'var(--gold)';
+      const dim = hover ? 'rgba(201,168,76,0.25)' : 'var(--border)';
+      if (val >= s) {
+        stop1.setAttribute('stop-color', gold);
+        stop2.setAttribute('stop-color', gold);
+      } else if (val >= s - 0.5) {
+        stop1.setAttribute('stop-color', gold);
+        stop2.setAttribute('stop-color', dim);
+      } else {
+        stop1.setAttribute('stop-color', dim);
+        stop2.setAttribute('stop-color', dim);
+      }
+    }
+  }
+
+  function updateDisplay(name, val) {
+    const d = document.getElementById(`${name}-display`);
+    if (!d) return;
+    if (val === 0) { d.textContent = '—'; return; }
+    if (val % 1 === 0) {
+      d.textContent = val;
+    } else {
+      d.innerHTML = `${Math.floor(val)}<span class="star-val-half">.5</span>`;
+    }
+  }
+
+  function inject(id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
+
+  inject('q-atm',         slider('atm','atm'));
+  inject('q-service',     starRating('service'));
+  inject('q-food',        cards('food',[
+    {v:1,label:'Nagyon gyenge'},
+    {v:3,label:'Fejlesztésre szorul'},
+    {v:5,label:'Megfelelő'},
+    {v:7,label:'Jó'},
+    {v:9,label:'Kiváló'},
+  ]));
+  inject('q-visits',      cards('visits',[
+    {v:0,label:'Egyszer sem'},
+    {v:1,label:'1–2 alkalommal'},
+    {v:3,label:'3–4 alkalommal'},
+    {v:5,label:'5 vagy több alkalommal'},
+  ]));
+  inject('q-comms',       cards('comms',[
+    {v:1,label:'Általában lekésem'},
+    {v:3,label:'Néha értesülök'},
+    {v:5,label:'Általában tudok róla'},
+    {v:7,label:'Legtöbbször időben'},
+    {v:9,label:'Mindig időben értesülök'},
+  ]));
+  inject('q-events',      starRating('events'));
+  inject('q-community',   numRow('community'));
+  inject('q-usage',       cards('usage',[
+    {v:1,label:'Szinte soha nem járok'},
+    {v:3,label:'Ritkábban, mint szeretném'},
+    {v:5,label:'Nagyjából eleget'},
+    {v:7,label:'Rendszeresen járok'},
+    {v:9,label:'Sűrűn, teljes mértékben megéri'},
+  ]));
+  inject('q-value',       slider('value','value'));
+  inject('q-recommend',   starRating('recommend'));
+
+  // Build interactive star widgets
+  buildStars('service');
+  buildStars('events');
+  buildStars('recommend');
+
+  // Slider live updates — simple large number display
+  function updateSlider(el) {
+    const id = el.id.replace('-slider','');
+    const display = document.getElementById(id + '-val');
+    const val = parseFloat(el.value);
+    const pct = ((val - el.min) / (el.max - el.min)) * 100;
+    el.style.background = `linear-gradient(to right, rgba(201,168,76,0.5) 0%, var(--gold) ${pct}%, var(--border) ${pct}%)`;
+    if (display) {
+      if (val % 1 === 0) {
+        display.innerHTML = `${val}`;
+      } else {
+        const whole = Math.floor(val);
+        display.innerHTML = `${whole}<span class="slider-half"><span class="slider-dot">.</span>5</span>`;
+      }
+    }
+  }
+  // Init sliders at correct visual position
+  document.querySelectorAll('.fancy-slider').forEach(s => updateSlider(s));
+
+  // Vendég kártyák
+  const guestCards = document.getElementById('guest-cards');
+  if (guestCards) {
+    guestCards.innerHTML = cards('guests',[
+      {v:1,icon:'◇',label:'Soha'},
+      {v:3,icon:'◈',label:'Ritkán'},
+      {v:5,icon:'◇',label:'Alkalmanként'},
+      {v:7,icon:'◈',label:'Rendszeresen'},
+      {v:9,icon:'◆',label:'Igen, gyakran'},
+    ]);
+  }
+
+  // Látogatás időpontja checkboxok
+  function buildCheckboxes(containerId, name, opts) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = opts.map(o =>
+      `<label class="cb-opt"><input type="checkbox" name="${name}" value="${o.v}"><span class="cb-box">✓</span>${o.label}</label>`
+    ).join('');
+  }
+  buildCheckboxes('timing-checks', 'timing', [
+    {v:'weekday_afternoon', label:'Hétköznap délután'},
+    {v:'weekday_evening',   label:'Hétköznap este'},
+    {v:'weekend_afternoon', label:'Hétvégén délután'},
+    {v:'weekend_evening',   label:'Hétvégén este'},
+    {v:'event_only',        label:'Esemény alkalmával'},
+  ]);
+  buildCheckboxes('eventtime-checks', 'eventtime', [
+    {v:'early_eve',         label:'Kora este (17–19h)'},
+    {v:'evening',           label:'Este (19–22h)'},
+    {v:'weekend_brunch',    label:'Hétvégi brunch / ebéd'},
+    {v:'weekend_evening',   label:'Hétvége este'},
+  ]);
+
+  // ── Scroll-reveal animation ──────────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Once visible, never hide again
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  // Observe all sections and scale-items
+  function observeAll() {
+    document.querySelectorAll('.section, .scale-item').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 4) * 0.07}s`;
+      observer.observe(el);
+    });
+  }
+  // Also make header immediately visible
+  document.querySelector('.header').style.opacity = '1';
+
+  // ── Progress tracking ────────────────────────────────────────────────────
+  const form = document.getElementById('form');
+
+  function updateProgress() {} // no-op, progress bar removed
+
+  form.addEventListener('change', updateProgress);
+  form.querySelectorAll('textarea').forEach(t => t.addEventListener('input', updateProgress));
+
+  // Init scroll reveal after all dynamic content is in DOM
+  observeAll();
+
+  // Drag & drop ranking
+  const rankList = document.getElementById('rank-list');
+  let dragging = null;
+
+  rankList.querySelectorAll('.rank-item').forEach(item => {
+    item.addEventListener('dragstart', () => {
+      dragging = item;
+      setTimeout(() => item.classList.add('dragging'), 0);
+    });
+    item.addEventListener('dragend', () => {
+      item.classList.remove('dragging');
+      dragging = null;
+      updateNumbers();
+      updateRankingValue();
+    });
+    item.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (dragging && dragging !== item) {
+        const rect = item.getBoundingClientRect();
+        const mid = rect.top + rect.height / 2;
+        if (e.clientY < mid) {
+          rankList.insertBefore(dragging, item);
+        } else {
+          rankList.insertBefore(dragging, item.nextSibling);
+        }
+        updateNumbers();
+      }
+    });
+  });
+
+  function updateNumbers() {
+    rankList.querySelectorAll('.rank-item').forEach((item, i) => {
+      item.querySelector('.rank-number').textContent = i + 1;
+    });
+  }
+
+  function updateRankingValue() {
+    const order = [...rankList.querySelectorAll('.rank-item')].map(i => i.dataset.value);
+    document.getElementById('ranking-value').value = order.join(',');
+  }
+
+  updateRankingValue();
+
+  // Touch support for mobile
+  let touchItem = null, touchClone = null;
+
+  rankList.querySelectorAll('.rank-item').forEach(item => {
+    item.addEventListener('touchstart', e => {
+      touchItem = item;
+      item.classList.add('dragging');
+    }, {passive: true});
+
+    item.addEventListener('touchmove', e => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const els = document.elementsFromPoint(touch.clientX, touch.clientY);
+      const target = els.find(el => el.classList.contains('rank-item') && el !== touchItem);
+      if (target) {
+        const rect = target.getBoundingClientRect();
+        if (touch.clientY < rect.top + rect.height / 2) {
+          rankList.insertBefore(touchItem, target);
+        } else {
+          rankList.insertBefore(touchItem, target.nextSibling);
+        }
+        updateNumbers();
+      }
+    }, {passive: false});
+
+    item.addEventListener('touchend', () => {
+      if (touchItem) {
+        touchItem.classList.remove('dragging');
+        touchItem = null;
+        updateRankingValue();
+      }
+    });
+  });
+
+  // Form submit — Formspree
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const result = {};
+    data.forEach((v, k) => { result[k] = v; });
+
+    const fieldLabels = {
+      tenure:         'Tagság hossza',
+      atm:            'Atmoszféra (1-10)',
+      best:           'Mi tetszik a legjobban',
+      service:        'Kiszolgálás (1-5 csillag)',
+      food:           'Ételkínálat',
+      improve:        'Mit változtatna',
+      drinks_missing: 'Mi hiányzik az itallapról',
+      timing:         'Mikor látogat',
+      visits:         'Látogatás (elmúlt 2 hónap)',
+      comms:          'Értesülés eseményekről',
+      eventtime:      'Napszak preferencia',
+      events:         'Elmúlt 3 hónap eseményei (1-5 csillag)',
+      fav_events:     'Kedvenc esemény',
+      ranking:        'Esemény rangsor',
+      community:      'Közösség érzete (1-10)',
+      usage:          'Látogatás megéri?',
+      value:          'Tagság értéke (1-10)',
+      recommend:      'Ajánlás (1-5 csillag)',
+    };
+
+    const payload = {};
+    for (const [field, label] of Object.entries(fieldLabels)) {
+      payload[label] = result[field] ?? '';
+    }
+
+    fetch('https://formspree.io/f/xyknlzpb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    .then(res => {
+      if (!res.ok) console.error('Formspree hiba:', res.status);
+    })
+    .catch(err => console.error('Küldési hiba:', err));
+
+    form.style.display = 'none';
+    document.getElementById('success').classList.add('visible');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+</script>
+</body>
+</html>
